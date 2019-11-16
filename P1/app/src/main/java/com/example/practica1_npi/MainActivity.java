@@ -87,9 +87,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         getSensors();
 
-        // Recibimos gestos
-        new GesturePerformListener(findViewById(R.id.gesture_time_line));
-
 
         // Iniciamos la funcionalidad para obtener la localización
 

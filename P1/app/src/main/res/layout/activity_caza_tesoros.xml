@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CazaTesoros">
+    tools:context=".CazaTesoros.CazaTesoros">
 
     <android.gesture.GestureOverlayView
         android:id="@+id/gesture_treasure_hunt"
@@ -52,7 +52,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.example.practica1_npi.DropContainer
+            <com.example.practica1_npi.CazaTesoros.DropContenedor
                 android:id="@+id/clue"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -76,7 +76,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-            </com.example.practica1_npi.DropContainer>
+            </com.example.practica1_npi.CazaTesoros.DropContenedor>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
@@ -89,7 +89,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout1">
 
-                <com.example.practica1_npi.Imagen
+                <com.example.practica1_npi.CazaTesoros.Imagen
                     android:id="@+id/imagen1"
                     android:layout_width="88dp"
                     android:layout_height="88dp"
@@ -102,7 +102,7 @@
                     app:srcCompat="@drawable/i1" />
 
 
-                <com.example.practica1_npi.Imagen
+                <com.example.practica1_npi.CazaTesoros.Imagen
                     android:id="@+id/imagen2"
                     android:layout_width="88dp"
                     android:layout_height="88dp"
@@ -115,7 +115,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/i2" />
 
-                <com.example.practica1_npi.Imagen
+                <com.example.practica1_npi.CazaTesoros.Imagen
                     android:id="@+id/imagen3"
                     android:layout_width="88dp"
                     android:layout_height="88dp"
@@ -127,7 +127,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/i6" />
 
-                <com.example.practica1_npi.Imagen
+                <com.example.practica1_npi.CazaTesoros.Imagen
                     android:id="@+id/imagen4"
                     android:layout_width="88dp"
                     android:layout_height="88dp"
@@ -139,7 +139,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/imagen1"
                     app:srcCompat="@drawable/i4" />
 
-                <com.example.practica1_npi.Imagen
+                <com.example.practica1_npi.CazaTesoros.Imagen
                     android:id="@+id/imagen5"
                     android:layout_width="88dp"
                     android:layout_height="88dp"
@@ -151,7 +151,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/imagen2"
                     app:srcCompat="@drawable/i5" />
 
-                <com.example.practica1_npi.Imagen
+                <com.example.practica1_npi.CazaTesoros.Imagen
                     android:id="@+id/imagen6"
                     android:layout_width="88dp"
                     android:layout_height="88dp"
@@ -163,7 +163,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/imagen3"
                     app:srcCompat="@drawable/i3" />
 
-                <com.example.practica1_npi.Imagen
+                <com.example.practica1_npi.CazaTesoros.Imagen
                     android:id="@+id/qr1"
                     android:layout_width="88dp"
                     android:layout_height="88dp"
@@ -175,7 +175,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/imagen4"
                     app:srcCompat="@drawable/qr" />
 
-                <com.example.practica1_npi.Imagen
+                <com.example.practica1_npi.CazaTesoros.Imagen
                     android:id="@+id/qr2"
                     android:layout_width="88dp"
                     android:layout_height="88dp"
@@ -187,7 +187,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/imagen5"
                     app:srcCompat="@drawable/qr" />
 
-                <com.example.practica1_npi.Imagen
+                <com.example.practica1_npi.CazaTesoros.Imagen
                     android:id="@+id/qr3"
                     android:layout_width="88dp"
                     android:layout_height="88dp"
@@ -202,7 +202,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.example.practica1_npi.DropContainer
+            <com.example.practica1_npi.CazaTesoros.DropContenedor
                 android:id="@+id/scan"
                 android:layout_width="0dp"
                 android:layout_height="133dp"
@@ -227,7 +227,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-            </com.example.practica1_npi.DropContainer>
+            </com.example.practica1_npi.CazaTesoros.DropContenedor>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </android.gesture.GestureOverlayView>
 

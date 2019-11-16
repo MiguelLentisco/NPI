@@ -25,12 +25,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActividadTextoPuntoInteres" />
-        <activity android:name=".CazaTesoros"/>
-        <activity android:name=".DetectarQRActivity"
-            android:parentActivityName=".CazaTesoros">
+        <activity android:name=".CazaTesoros.CazaTesoros"/>
+        <activity android:name=".CazaTesoros.DetectarQRActivity"
+            android:parentActivityName=".CazaTesoros.CazaTesoros">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CazaTesoros" />
+                android:value=".CazaTesoros.CazaTesoros" />
         </activity>
     </application>
 
