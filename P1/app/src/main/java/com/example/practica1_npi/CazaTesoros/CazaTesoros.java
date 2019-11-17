@@ -10,9 +10,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import com.google.android.gms.vision.Detector;
 
 import com.example.practica1_npi.R;
-import com.google.android.gms.vision.Detector;
 
 /**
  * Actividad principal de CazaTesoros.
@@ -77,30 +77,34 @@ public class CazaTesoros extends AppCompatActivity {
      * @param requestCode El tipo de petición de actividad
      * @param resultCode El resultado de la actividad
      * @param data Los datos resultantes de la actividad
-     * @see DropContenedor#hacerFoto(CazaTesoros, int)
-     * @see Imagen#desbloquearImagen(Bitmap)
-     * @see Imagen#desbloquearImagen(int)
-     * @see DetectarQRActivity#QR_ID
-     * @see DetectarQRActivity.DetectorProcessorBarcode#receiveDetections(Detector.Detections)
+     * @see DetectorQR#QR_ID
+     * @see DetectorQR.DetectorProcessorBarcode#receiveDetections(Detector.Detections)
+     * @see DropContenedor#escanearFoto(CazaTesoros, int)
+     * @see Imagen
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // Si el resultado es correcto
         if (RESULT_OK == resultCode) {
+            Imagen img = null;
             // Si el código es de la cámara
             if (CAMERA_RESULT == requestCode){
                 // Datos resultado
                 Bundle extras = data.getExtras();
-                // Tomamos la imagen actual
-                Imagen img = findViewById(idActual);
+                // Imagen seleccionada
+                img = findViewById(idActual);
+                Bitmap foto = (Bitmap) extras.get("data");
                 // Ponemos la nueva foto desde la cámara
-                img.desbloquearImagen((Bitmap) extras.get("data"));
+                img.setImageBitmap(foto);
+                // Felicitaciones
+                Toast.makeText(this, "Congratulations! Pattern found.", Toast.LENGTH_LONG).show();
             } else if (BARCODE_RESULT == requestCode) {
                 // ID del QR
-                int id = data.getIntExtra(DetectarQRActivity.QR_ID, -1);
+                int id = data.getIntExtra(DetectorQR.QR_ID, -1);
                 if (id != -1) {
-                    Imagen img = findViewById(id);
+                    // Imagen del QR leido
+                    img = (Imagen) findViewById(id);
                     int foto;
                     // Seleccionamos la imagen del QR correspondiente
                     switch (id) {
@@ -117,12 +121,16 @@ public class CazaTesoros extends AppCompatActivity {
                             foto = -1;
                             Log.e("CazaTesoros:","OnActivityResult - ID no válida");
                     }
-                    // Desbloqueamos la imágen secreta
-                    img.desbloquearImagen(foto);
+                    // Desbloqueamos la imagen secreta
+                    if (!img.getDesbloqueada()) {
+                        img.setImageResource(foto);
+                        // Felicitaciones
+                        Toast.makeText(this, "Congratulations! QR found.", Toast.LENGTH_SHORT).show();
+                    } else
+                        // QR ya repetido
+                        Toast.makeText(this, "QR already found!", Toast.LENGTH_SHORT).show();
                 }
             }
-            // Toast felicitando
-            Toast.makeText(this, "Congratulations! Keep on like this.", Toast.LENGTH_LONG).show();
         }
     }
 }

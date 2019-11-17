@@ -19,7 +19,8 @@ import com.example.practica1_npi.R;
 /**
  * ConstraintLayout modificado.
  * Representa un contenedor donde se puede soltar una imagen con una acción de arrastrar y soltar.
- * Si se suelta en el de "Clue" da una pista y en "Scan" activa el escaneo.
+ * Si se suelta en el de "Clue" da una pista con un Toast y en "Scan" activa el escaneo que en el
+ * caso de ser QR se pasa al DetectorQR y si no, a la cámara para hacer una foto.
  */
 public class DropContenedor extends ConstraintLayout implements View.OnDragListener {
 
@@ -63,9 +64,10 @@ public class DropContenedor extends ConstraintLayout implements View.OnDragListe
      * cámara/código QR; y si es "Clue", dará una pista.
      * @param view La view del objeto que escucha.
      * @param event El evento de arrastre y soltar.
-     * @see DropContenedor#hacerFoto(CazaTesoros, int)
+     * @see DropContenedor#escanearFoto(CazaTesoros, int)
      * @see DropContenedor#darPista(CazaTesoros, int)
      * @see Imagen#onLongClick(View)
+     * @see CazaTesoros#setIDActual(int)
      * @return Si se ha consumido el evento de arrastre.
      */
     @Override
@@ -110,7 +112,7 @@ public class DropContenedor extends ConstraintLayout implements View.OnDragListe
                 invalidate();
                 // Si el contenedor es "Scan", hacemos foto
                 if (this == activity.findViewById(R.id.scan))
-                    hacerFoto(activity, idActual);
+                    escanearFoto(activity, idActual);
                 // Si es "Clue", damos pista
                 else if (this == activity.findViewById(R.id.clue))
                     darPista(activity, idActual);
@@ -128,12 +130,10 @@ public class DropContenedor extends ConstraintLayout implements View.OnDragListe
      * @param activity La actividad CazaTesoros.
      * @param idActual La id de la imagen seleccionada.
      * @see DropContenedor#onDrag(View, DragEvent)
-     * @see CazaTesoros#BARCODE_RESULT
-     * @see CazaTesoros#CAMERA_RESULT
+     * @see DetectorQR
      * @see Imagen#getEsQR()
-     * @see DetectarQRActivity
      */
-    private void hacerFoto(CazaTesoros activity, int idActual) {
+    private void escanearFoto(CazaTesoros activity, int idActual) {
         // Imagen actual
         Imagen img = activity.findViewById(idActual);
         Intent it;
@@ -142,7 +142,7 @@ public class DropContenedor extends ConstraintLayout implements View.OnDragListe
         // Si es QR, el detector QR
         if (img.getEsQR()) {
             // Intención y código detector QR
-            it = new Intent(activity, DetectarQRActivity.class);
+            it = new Intent(activity, DetectorQR.class);
             codigo = CazaTesoros.BARCODE_RESULT;
         // Si no, la cámara
         } else {
@@ -160,39 +160,12 @@ public class DropContenedor extends ConstraintLayout implements View.OnDragListe
      * @param activity La actividad CazaTesoros.
      * @param idActual La id de la imagen seleccionada.
      * @see DropContenedor#onDrag(View, DragEvent)
+     * @see Imagen#getPista()
      */
     private void darPista(CazaTesoros activity, int idActual) {
-        String pista = "";
-        // Pista según la imagen
-        switch (idActual) {
-            case R.id.imagen1:
-                pista = "Busca por algun sitio del principio";
-                break;
-            case R.id.imagen2:
-                pista = "Busca por algun sitio del final";
-                break;
-            case R.id.imagen3:
-                pista = "Busca por algun sitio entre medias";
-                break;
-            case R.id.imagen4:
-                pista = "Busca por algun sitio de por dentro";
-                break;
-            case R.id.imagen5:
-                pista = "Busca por algun sitio de por arriba";
-                break;
-            case R.id.imagen6:
-                pista = "Busca por algun sitio de la pared";
-                break;
-            case R.id.qr1:
-                pista = "GRAAAAAAAAAAAAAAAUR!";
-                break;
-            case R.id.qr2:
-                pista = "Tolon tolon tolon tolon!";
-                break;
-            case R.id.qr3:
-                pista = "Muy circular esto.";
-                break;
-        }
+        // Tomamos la pista
+        Imagen img = activity.findViewById(idActual);
+        String pista = img.getPista();
         // Toast con la pista
         Toast.makeText(activity, pista, Toast.LENGTH_LONG).show();
     }

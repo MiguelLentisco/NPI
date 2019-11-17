@@ -13,24 +13,24 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Alhambra Time"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.practica1_npi.MapaTemporal.MapaTemporal">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActividadTextoPuntoInteres" />
-        <activity android:name=".CazaTesoros.CazaTesoros"/>
-        <activity android:name=".CazaTesoros.DetectarQRActivity"
-            android:parentActivityName=".CazaTesoros.CazaTesoros">
+        <activity android:name="com.example.practica1_npi.MapaTemporal.ActividadTextoPuntoInteres" />
+        <activity android:name="com.example.practica1_npi.CazaTesoros.CazaTesoros"/>
+        <activity android:name="com.example.practica1_npi.CazaTesoros.DetectorQR"
+            android:parentActivityName="com.example.practica1_npi.CazaTesoros.CazaTesoros">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CazaTesoros.CazaTesoros" />
+                android:value="com.example.practica1_npi.CazaTesoros.CazaTesoros" />
         </activity>
     </application>
 

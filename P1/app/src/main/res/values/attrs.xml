@@ -2,5 +2,7 @@
 <resources>
     <declare-styleable name="Imagen">
         <attr name="esQR" format="boolean" />
+        <attr name="info" format="string" />
+        <attr name="pista" format="string" />
     </declare-styleable>
 </resources>

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
@@ -12,12 +11,12 @@ import android.view.DragEvent;
 import android.view.View;
 
 import com.example.practica1_npi.R;
-import com.google.android.gms.vision.Detector;
 
 /**
  * ImagenView modificada.
- * Al hacer click largo empieza un arrastrar y soltar.
- * Guarda si la imagen está desbloqueada y si es QR.
+ * Al hacer click largo empieza un evento de arrastrar y soltar si la imagen no está desbloqueada.
+ * Si está desbloqueada entonces lanza un Dialog con información sobre la imagen.
+ * Guarda si es de tipo QR o no.
  */
 public class Imagen extends androidx.appcompat.widget.AppCompatImageView implements View.OnLongClickListener {
 
@@ -29,6 +28,14 @@ public class Imagen extends androidx.appcompat.widget.AppCompatImageView impleme
      * Si la imagen es de tipo QR. Por defecto no.
      */
     private boolean esQR = false;
+    /**
+     * Info sobre la imagen.
+     */
+    private String info = "";
+    /**
+     * Pista sobre la imagen.
+     */
+    private String pista = "";
 
     /**
      * Constructor básico.
@@ -55,6 +62,8 @@ public class Imagen extends androidx.appcompat.widget.AppCompatImageView impleme
         // Establecemos los atributos y los desechamos
         try {
             esQR = a.getBoolean(R.styleable.Imagen_esQR, false);
+            info = a.getString(R.styleable.Imagen_info);
+            pista = a.getString(R.styleable.Imagen_pista);
         } finally {
             a.recycle();
         }
@@ -78,6 +87,8 @@ public class Imagen extends androidx.appcompat.widget.AppCompatImageView impleme
         // Establecemos los atributos y los desechamos
         try {
             esQR = a.getBoolean(R.styleable.Imagen_esQR, false);
+            info = a.getString(R.styleable.Imagen_info);
+            pista = a.getString(R.styleable.Imagen_pista);
         } finally {
             a.recycle();
         }
@@ -88,7 +99,6 @@ public class Imagen extends androidx.appcompat.widget.AppCompatImageView impleme
     /**
      * Si la imagen es QR.
      * @return Devuelve True si la imagen es QR, False en caso contrario.
-     * @see DropContenedor#hacerFoto(CazaTesoros, int)
      */
     public boolean getEsQR() {
         return esQR;
@@ -97,14 +107,29 @@ public class Imagen extends androidx.appcompat.widget.AppCompatImageView impleme
     /**
      * Si la imagen está desbloqueada.
      * @return Devuelve True si la imagen está desbloqueada, False en caso contrario.
-     * @see DetectarQRActivity.DetectorProcessorBarcode#receiveDetections(Detector.Detections)
      */
     public boolean getDesbloqueada() { return desbloqueada; }
 
     /**
+     * Devuelve información de la imagen.
+     * @return Información sobre la imagen.
+     */
+    public String getInfo() {
+        return info;
+    }
+
+    /**
+     * Devuelve la pista de la imagen.
+     * @return Pista sobre la imagen.
+     */
+    public String getPista() {
+        return pista;
+    }
+
+    /**
      * Cuando se hace un click largo en la imagen.
-     * Si está desbloqueada se muestra su información, en caso contrario se empieza
-     * a realizar el movimiento arrastrar y soltar.
+     * Si está desbloqueada se muestra su información mediante InfoImagen (Dialog),
+     * en caso contrario se empieza a realizar el evento arrastrar y soltar.
      * @param view La view donde se ha hecho click.
      * @see DropContenedor#onDrag(View, DragEvent)
      * @see InfoImagen
@@ -115,7 +140,7 @@ public class Imagen extends androidx.appcompat.widget.AppCompatImageView impleme
         // Si está desbloqueada, arrastrar y soltar
         if (!desbloqueada) {
             // Guardamos la ID de la imagen
-            ClipData.Item item = new ClipData.Item(Integer.toString(view.getId()));
+            ClipData.Item item = new ClipData.Item(Integer.toString(getId()));
             // Info en texto plano
             String[] mimeTypes = {ClipDescription.MIMETYPE_TEXT_PLAIN};
             // Encapsulamos los datos
@@ -127,29 +152,30 @@ public class Imagen extends androidx.appcompat.widget.AppCompatImageView impleme
         // Si no, mostramos su información
         } else
             // Información de la imagen mostrada
-            new InfoImagen((Activity) getContext(), getId()).show();
+            new InfoImagen((Activity) getContext(), this).show();
         return true;
     }
 
     /**
      * Desbloquea la imagen y la cambia.
      * Se cambia por una imagen nueva que se le pasa.
-     * @param imagen La imagen nueva.
-     * @see CazaTesoros#onActivityResult(int, int, Intent)
+     * @param imagen La imagen nueva en formato bitmap.
      */
-    public void desbloquearImagen(Bitmap imagen) {
-        setImageBitmap(Bitmap.createScaledBitmap(imagen, 400, 400, false));
+    @Override
+    public void setImageBitmap(Bitmap imagen) {
         desbloqueada = true;
+        super.setImageBitmap(Bitmap.createScaledBitmap(imagen, 400, 400, false));
     }
 
     /**
      * Desbloquea la imagen y la cambia.
      * Se cambia por una imagen de QR guardada, con la id indicada.
-     * @param idImagenResource
-     * @see CazaTesoros#onActivityResult(int, int, Intent)
+     * @param idResource La id de la imagen a cambiar.
      */
-    public void desbloquearImagen(int idImagenResource) {
-        setImageResource(idImagenResource);
+    @Override
+    public void setImageResource(int idResource) {
         desbloqueada = true;
+        super.setImageResource(idResource);
     }
+
 }

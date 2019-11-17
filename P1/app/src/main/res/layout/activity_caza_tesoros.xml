@@ -6,17 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".CazaTesoros.CazaTesoros">
 
-    <android.gesture.GestureOverlayView
+    <com.example.practica1_npi.DetectorGestos.DetectorGestos
         android:id="@+id/gesture_treasure_hunt"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:gestureColor="#FF0000"
+        android:uncertainGestureColor="#E0D8B5"
+        android:gestureStrokeType="multiple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gestureColor="#FF0000"
-        android:gestureStrokeType="multiple"
-        android:uncertainGestureColor="#E0D8B5">
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -94,11 +94,13 @@
                     android:layout_width="88dp"
                     android:layout_height="88dp"
                     app:esQR="false"
+                    app:info="Texto de prueba 1\nTexto Texto\nTexto Texto\nTexto Texto \nTexto\nTexto\nTexto"
                     app:layout_constraintBottom_toTopOf="@+id/imagen4"
                     app:layout_constraintEnd_toStartOf="@+id/imagen2"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:pista="Busca por algun sitio del principio"
                     app:srcCompat="@drawable/i1" />
 
 
@@ -108,11 +110,13 @@
                     android:layout_height="88dp"
                     android:tag="imagen2"
                     app:esQR="false"
+                    app:info="Texto de prueba 2\nTexto Texto\nTexto Texto\nTexto Texto \nTexto\nTexto\nTexto"
                     app:layout_constraintBottom_toTopOf="@+id/imagen5"
                     app:layout_constraintEnd_toStartOf="@+id/imagen3"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/imagen1"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:pista="Busca por algun sitio del final"
                     app:srcCompat="@drawable/i2" />
 
                 <com.example.practica1_npi.CazaTesoros.Imagen
@@ -120,23 +124,28 @@
                     android:layout_width="88dp"
                     android:layout_height="88dp"
                     app:esQR="false"
+                    app:info="Texto de prueba 3\nTexto Texto\nTexto Texto\nTexto Texto \nTexto\nTexto\nTexto"
                     app:layout_constraintBottom_toTopOf="@+id/imagen6"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/imagen2"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/i6" />
+                    app:pista="Busca por algun sitio entre medias"
+                    app:srcCompat="@drawable/i6"
+                    tools:pista="Busca por algun sitio entre medias" />
 
                 <com.example.practica1_npi.CazaTesoros.Imagen
                     android:id="@+id/imagen4"
                     android:layout_width="88dp"
                     android:layout_height="88dp"
                     app:esQR="false"
+                    app:info="Texto de prueba 4\nTexto Texto\nTexto Texto\nTexto Texto \nTexto\nTexto\nTexto"
                     app:layout_constraintBottom_toTopOf="@+id/qr1"
                     app:layout_constraintEnd_toStartOf="@+id/imagen5"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imagen1"
+                    app:pista="Busca por algun sitio de por dentro"
                     app:srcCompat="@drawable/i4" />
 
                 <com.example.practica1_npi.CazaTesoros.Imagen
@@ -144,11 +153,13 @@
                     android:layout_width="88dp"
                     android:layout_height="88dp"
                     app:esQR="false"
+                    app:info="Texto de prueba 5\nTexto Texto\nTexto Texto\nTexto Texto \nTexto\nTexto\nTexto"
                     app:layout_constraintBottom_toTopOf="@+id/qr2"
                     app:layout_constraintEnd_toStartOf="@+id/imagen6"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/imagen4"
                     app:layout_constraintTop_toBottomOf="@+id/imagen2"
+                    app:pista="Busca por algun sitio de por arriba"
                     app:srcCompat="@drawable/i5" />
 
                 <com.example.practica1_npi.CazaTesoros.Imagen
@@ -156,11 +167,13 @@
                     android:layout_width="88dp"
                     android:layout_height="88dp"
                     app:esQR="false"
+                    app:info="Texto de prueba 6\nTexto Texto\nTexto Texto\nTexto Texto \nTexto\nTexto\nTexto"
                     app:layout_constraintBottom_toTopOf="@+id/qr3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/imagen5"
                     app:layout_constraintTop_toBottomOf="@+id/imagen3"
+                    app:pista="Busca por algun sitio de la pared"
                     app:srcCompat="@drawable/i3" />
 
                 <com.example.practica1_npi.CazaTesoros.Imagen
@@ -168,6 +181,7 @@
                     android:layout_width="88dp"
                     android:layout_height="88dp"
                     app:esQR="true"
+                    app:info="Texto de prueba 7\nTexto Texto\nTexto Texto\nTexto Texto \nTexto\nTexto\nTexto"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/qr2"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -180,11 +194,13 @@
                     android:layout_width="88dp"
                     android:layout_height="88dp"
                     app:esQR="true"
+                    app:info="Texto de prueba 8\nTexto Texto\nTexto Texto\nTexto Texto \nTexto\nTexto\nTexto"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/qr3"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/qr1"
                     app:layout_constraintTop_toBottomOf="@+id/imagen5"
+                    app:pista="Tolon tolon tolon tolon!"
                     app:srcCompat="@drawable/qr" />
 
                 <com.example.practica1_npi.CazaTesoros.Imagen
@@ -192,11 +208,13 @@
                     android:layout_width="88dp"
                     android:layout_height="88dp"
                     app:esQR="true"
+                    app:info="Texto de prueba 9\nTexto Texto\nTexto Texto\nTexto Texto \nTexto\nTexto\nTexto"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/qr2"
                     app:layout_constraintTop_toBottomOf="@+id/imagen6"
+                    app:pista="Muy circular esto."
                     app:srcCompat="@drawable/qr" />
 
 
@@ -229,6 +247,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </com.example.practica1_npi.CazaTesoros.DropContenedor>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </android.gesture.GestureOverlayView>
+    </com.example.practica1_npi.DetectorGestos.DetectorGestos>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
